@@ -27,11 +27,6 @@
   <div class="hero-info">
     <div>
       <div class="hero-name"><span class="first">Bridget</span><br><span class="last">Huang</span></div>
-      <!-- <div class="genre-row">
-        <span class="genre">Product Marketing</span>
-        <span class="genre">Community</span>
-        <span class="genre">Brand Storytelling</span>
-      </div> -->
     </div>
     <p class="hero-bio">I'm a product & community marketer based in San Francisco. Currently, I'm running community marketing for Picnic/Atoms across Northern California.</p>
   </div>
@@ -49,7 +44,7 @@
       </div>
     </a>
 
-    <a class="record" href="about.html" data-modal="about" style="--c1:#C56A79;--c2:#A15D66">
+    <a class="record" href="about.html" style="--c1:#C56A79;--c2:#A15D66">
       <div class="rec-vinyl"><span class="rec-vinyl-label">ABOUT</span></div>
       <div class="rec-cover">
         <div class="rec-top"><span class="rec-num">A2</span></div>
@@ -68,50 +63,6 @@
         </div>
       </div>
     </a>
-  </div>
-</div>
-
-<div class="modal-backdrop bottom-sheet" id="aboutModal" hidden>
-  <div class="panel" role="dialog" aria-labelledby="aboutPanelTitle" aria-modal="true">
-    <div class="panel-handle"></div>
-    <button class="modal-close" aria-label="Close" data-close>×</button>
-    <div class="panel-scroll">
-      <div class="sp-photo">
-        <img src="photo.png" alt="Bridget Huang" onerror="this.style.display='none'">
-        <div class="sp-photo-label">About Bridget</div>
-      </div>
-      <div class="sp-meta">
-        <div class="sp-rank">Side B · Track 02</div>
-        <div class="sp-row">
-          <h2 class="sp-name" id="aboutPanelTitle">Bridget Huang</h2>
-          <a class="sp-follow" href="https://drive.google.com/file/d/1NsUCp_u7I3VbAYjw9F32L-427oBR-SXb/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
-        </div>
-        <div class="sp-stat">Product &amp; community marketer · San Francisco</div>
-        <p class="sp-bio">UC Davis grad working in product and community marketing. Currently at Atoms doing community and account marketing for Picnic across Northern California. Outside of work I watch too many TV shows, dabble in baking, and am always on the hunt for good matcha.</p>
-      </div>
-
-      <div class="currently">
-        <div class="sec-header"><div class="sec-title">I'm currently —</div></div>
-        <div class="curr-list">
-          <div class="curr-item"><span class="curr-dash">—</span><span class="curr-text">community and account marketing at Atoms <em>(Picnic)</em></span></div>
-          <div class="curr-item"><span class="curr-dash">—</span><span class="curr-text">thinking a lot about how AI is changing the way marketing teams work</span></div>
-          <div class="curr-item"><span class="curr-dash">—</span><span class="curr-text">open to product and community marketing roles in AI / tech</span></div>
-          <div class="curr-item"><span class="curr-dash">—</span><span class="curr-text">perfecting this website <em>(it's a process)</em></span></div>
-        </div>
-      </div>
-
-      <div class="connect">
-        <div class="sec-header"><div class="sec-title">Let's connect</div></div>
-        <div class="connect-links">
-          <a class="connect-link" href="mailto:bridgethuang31@gmail.com">
-            <span class="cl-label">email</span><span class="cl-val">Send me a message →</span>
-          </a>
-          <a class="connect-link" href="https://linkedin.com/in/bridget-huangg" target="_blank" rel="noopener">
-            <span class="cl-label">linkedin</span><span class="cl-val">Connect with me →</span>
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -137,7 +88,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   var disc = document.getElementById('vinylDisc');
   if (disc) {
-    // Replace CSS spin with Web Animations so we can boost playbackRate on mouse movement
     disc.style.animation = 'none';
     var spin = disc.animate(
       [{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }],
@@ -162,30 +112,23 @@ document.addEventListener('DOMContentLoaded', function () {
       if (paused) return;
       var t = performance.now();
       if (lastT > 0) {
-        var dx = e.clientX - lastX;
-        var dy = e.clientY - lastY;
-        var dt = t - lastT;
+        var dx = e.clientX - lastX, dy = e.clientY - lastY, dt = t - lastT;
         if (dt > 0) {
-          var vel = Math.sqrt(dx * dx + dy * dy) / dt; // px/ms
+          var vel = Math.sqrt(dx*dx + dy*dy) / dt;
           var boost = Math.min(vel * 3, 9);
           var newRate = 1 + boost;
-          if (newRate > targetRate) {
-            targetRate = newRate;
-            spin.playbackRate = targetRate;
-          }
+          if (newRate > targetRate) { targetRate = newRate; spin.playbackRate = targetRate; }
         }
       }
       lastX = e.clientX; lastY = e.clientY; lastT = t;
       if (decayRaf) cancelAnimationFrame(decayRaf);
       decayRaf = requestAnimationFrame(decay);
     });
-
     disc.addEventListener('mouseleave', function () {
       lastT = 0;
       if (decayRaf) cancelAnimationFrame(decayRaf);
       decayRaf = requestAnimationFrame(decay);
     });
-
     disc.addEventListener('click', function () {
       paused = !paused;
       if (paused) spin.pause(); else spin.play();
