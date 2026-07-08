@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Work — Bridget Huang</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="components.js"></script>
+  <style>
+    .main { padding:0 40px; }
+    .role-block { padding:28px 0; border-bottom:1px solid var(--bg3); display:grid; grid-template-columns:160px 1fr; gap:24px; }
+    .role-period { font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.08em; color:var(--muted); margin-bottom:5px; text-transform:uppercase; }
+    .role-company { font-family:'Poppins',sans-serif; font-size:15px; font-style:italic; color:var(--ink); margin-bottom:3px; font-weight:500; }
+    .role-location { font-size:11px; color:var(--muted); }
+    .role-bar { width:24px; height:2px; border-radius:2px; margin-top:10px; }
+    .role-title { font-family:'Poppins',sans-serif; font-size:22px; color:var(--ink); margin-bottom:12px; font-weight:500; }
+    .bullets { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+    .bullets li { font-size:12.5px; color:var(--ink2); line-height:1.7; padding-left:16px; position:relative; font-weight:300; }
+    .bullets li::before { content:'—'; position:absolute; left:0; color:var(--muted); font-size:11px; }
+    /* ── Stat cards: simple, with vinyl-groove accent ── */
+    .stat-row { display:flex; gap:14px; flex-wrap:wrap; margin-top:4px; }
+    .stat {
+      --c: var(--accent);
+      position: relative;
+      padding: 14px 18px;
+      background: var(--bg);
+      border: 1px solid var(--bg3);
+      border-left: 3px solid var(--c);
+      border-radius: 4px;
+      min-width: 138px;
+      box-shadow: 0 1px 2px rgba(50,31,18,0.05);
+      transition: transform 0.35s cubic-bezier(.22,1,.36,1), box-shadow 0.35s ease;
+      transform: rotate(-0.5deg);
+      overflow: hidden;
+    }
+    .stat::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -30%;
+      width: 70%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        repeating-radial-gradient(circle at center, transparent 0 2px, rgba(107,66,38,0.35) 2px 2.4px);
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .stat:nth-child(2) { transform: rotate(0.6deg) translateY(-2px); }
+    .stat:nth-child(3) { transform: rotate(-0.8deg) translateY(1px); }
+    .stat:hover {
+      transform: rotate(0deg) translateY(-3px);
+      box-shadow: 0 10px 22px rgba(50,31,18,0.14);
+    }
+    .stat-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      color: var(--c);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+    .edu-block { padding:28px 0; display:grid; grid-template-columns:160px 1fr; gap:24px; }
+    .edu-degree { font-family:'Poppins',sans-serif; font-size:20px; color:var(--ink); margin-bottom:5px; font-weight:500; line-height:1.2; }
+    .edu-school { font-size:13px; color:var(--ink2); margin-bottom:6px; }
+    .coursework { font-size:11px; color:var(--muted); line-height:1.7; font-weight:300; }
+    .skills-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:36px 32px; padding:22px 0 0; }
+    .skill-card { background:none; border:none; padding:0; }
+    .skill-card-label { font-family:'Space Mono',monospace; font-size:8px; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; }
+
+    .skill-discs { display:flex; flex-wrap:nowrap; padding:10px 27px 10px 0; }
+    .skill-disc {
+      width:90px; height:90px;
+      border-radius:50%;
+      background:
+        repeating-radial-gradient(circle at center, transparent 0 3.5px, rgba(107,66,38,0.55) 3.5px 3.75px),
+        var(--vinyl);
+      position:relative;
+      flex-shrink:0;
+      box-shadow: 0 1px 4px rgba(50,31,18,0.2);
+      transition: scale 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      scale: 1;
+    }
+    .skill-disc + .skill-disc { margin-left: -27px; }
+
+    /* scatter — each disc gets a slight tilt + offset so the row feels casual, not rigid */
+    .skill-disc:nth-child(6n+1) { rotate: -7deg;  translate: 0 4px; }
+    .skill-disc:nth-child(6n+2) { rotate:  5deg;  translate: 0 -3px; }
+    .skill-disc:nth-child(6n+3) { rotate: -10deg; translate: 0 6px; }
+    .skill-disc:nth-child(6n+4) { rotate:  8deg;  translate: 0 -5px; }
+    .skill-disc:nth-child(6n+5) { rotate: -4deg;  translate: 0 2px; }
+    .skill-disc:nth-child(6n)   { rotate:  11deg; translate: 0 -2px; }
+    .skill-discs:hover .skill-disc { filter: brightness(0.85); }
+    .skill-disc:hover {
+      z-index: 10;
+      scale: 1.15;
+      filter: brightness(1) !important;
+      box-shadow: 0 8px 22px rgba(50,31,18,0.38);
+      animation: spin 5s linear infinite;
+    }
+    .skill-disc-label {
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      width:58px; height:58px;
+      border-radius:50%;
+      background:var(--accent);
+      display:flex; align-items:center; justify-content:center;
+      padding:4px;
+      text-align:center;
+    }
+    .skill-disc-label span {
+      font-family:'Space Mono', monospace;
+      font-size:7.5px;
+      line-height:1.2;
+      letter-spacing:0.02em;
+      color:#F3EED7;
+      text-transform:uppercase;
+    }
+  </style>
+</head>
+<body>
+<site-nav active="experience"></site-nav>
+
+<page-hero class="fade-1" eyebrow="Side A" title="Experience" action="Resume" action-href="https://drive.google.com/file/d/1NsUCp_u7I3VbAYjw9F32L-427oBR-SXb/view?usp=sharing"></page-hero>
+
+<div class="main">
+
+  <div class="role-block fade-2">
+    <div>
+      <div class="role-period">Sept 2025 — Present</div>
+      <div class="role-company">Atoms (Picnic)</div>
+      <div class="role-location">San Francisco, CA</div>
+      <div class="role-bar" style="background:var(--accent)"></div>
+    </div>
+    <div>
+      <div class="role-title">Community Marketing Manager</div>
+      <ul class="bullets">
+        <li>Primary point of contact across 50+ Northern California offices, owning day-to-day account management to maintain 98.85% monthly customer retention.</li>
+        <li>Owned end-to-end execution of a 120+ person C-suite event, coordinating vendors, on-site setup, and marketing assets to align Picnic with strategic decision-makers.</li>
+        <li>Spearheaded Slack integration adoption from 0% to 30% across all accounts in one month by aligning with product on rollout strategy and onboarding flows.</li>
+        <li>Streamlined end-user experience by building self-serve resources and documenting processes, leading admin and product communications for feature launches.</li>
+      </ul>
+      <div class="stat-row">
+        <div class="stat" style="--c:var(--accent)">
+          <div class="stat-num">98.85%</div>
+          <div class="stat-label">Retention rate</div>
+        </div>
+        <div class="stat" style="--c:var(--accent)">
+          <div class="stat-num">120+</div>
+          <div class="stat-label">C-suite event</div>
+        </div>
+        <div class="stat" style="--c:var(--accent)">
+          <div class="stat-num">0→30%</div>
+          <div class="stat-label">Slack adoption</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="role-block fade-3">
+    <div>
+      <div class="role-period">Sept 2024 — June 2025</div>
+      <div class="role-company">InPrint Magazine</div>
+      <div class="role-location">Davis, CA</div>
+      <div class="role-bar" style="background:var(--olive)"></div>
+    </div>
+    <div>
+      <div class="role-title">Director of Marketing</div>
+      <ul class="bullets">
+        <li>Drove a 1,400% increase in Instagram profile views during a two-week launch sprint by leading story-led content — Writer Spotlights and Day-in-the-Life series.</li>
+        <li>Secured sponsorships with local businesses to drive revenue, producing partner toolkits (copy, assets, QR codes) to streamline distributed launch execution.</li>
+      </ul>
+      <div class="stat-row">
+        <div class="stat" style="--c:var(--olive)">
+          <div class="stat-num">1,400%</div>
+          <div class="stat-label">Instagram views increase</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="role-block fade-3">
+    <div>
+      <div class="role-period">June 2024 — Aug 2024</div>
+      <div class="role-company">Amazon</div>
+      <div class="role-location">Tracy, CA</div>
+      <div class="role-bar" style="background:var(--ink2)"></div>
+    </div>
+    <div>
+      <div class="role-title">Operations Management Intern</div>
+      <ul class="bullets">
+        <li>Improved visibility into returns processing by building a live dashboard that tracked associate progress in one view, enabling on-the-fly labor shifts.</li>
+        <li>Supported floor operations in a high-volume fulfillment center by monitoring associate performance, flagging safety concerns, and assisting leads during peak hours.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-header fade-3" style="margin-top:8px"><div class="sec-title">Education</div></div>
+
+  <div class="edu-block fade-3">
+    <div>
+      <div class="role-company">UC Davis</div>
+      <div class="role-location">Davis, CA</div>
+    </div>
+    <div>
+      <div class="edu-degree">B.S. Business Economics<br>Minor: Technology Management</div>
+      <div class="edu-school">University of California, Davis</div>
+      <div class="coursework">Marketing for the Tech Enterprise · Marketing & Advertising · Business Writing</div>
+    </div>
+  </div>
+
+  <div class="sec-header fade-4"><div class="sec-title">Skills & Tools</div></div>
+  <div class="skills-grid fade-4">
+    <div class="skill-card">
+      <div class="skill-card-label">Tools</div>
+      <div class="skill-discs">
+        <div class="skill-disc"><div class="skill-disc-label"><span>Canva</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Figma</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Notion</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Google Workspace</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Zendesk</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Mixpanel</span></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Marketing &amp; GTM</div>
+      <div class="skill-discs">
+        <div class="skill-disc"><div class="skill-disc-label"><span>Product Marketing</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Community Building</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Copywriting</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Event Marketing</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>Account Mgmt</span></div></div>
+        <div class="skill-disc"><div class="skill-disc-label"><span>B2B &amp; B2C</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
