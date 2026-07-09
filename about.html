@@ -17,7 +17,7 @@
     .sp-hero-photo {
       width: 100%;
       aspect-ratio: 1 / 1;
-      max-height: 600;
+      max-height: 500;
       position: relative;
       overflow: hidden;
       background: var(--bg2);
@@ -26,7 +26,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 35%;
       display: block;
     }
     .sp-hero-photo-placeholder {
@@ -40,7 +40,6 @@
       font-size: 11px; color: var(--muted);
       letter-spacing: 0.1em; text-transform: uppercase;
     }
-    /* gradient fade at the bottom of the photo */
     .sp-hero-photo::after {
       content: '';
       position: absolute;
@@ -49,7 +48,6 @@
       background: none;
       pointer-events: none;
     }
-    /* "About Bridget" label over the photo */
     .sp-hero-label {
       position: absolute;
       bottom: 24px;
@@ -144,7 +142,7 @@
       margin: 20px 28px 0;
     }
 
-    /* ── Content sections (scroll below controls like Spotify) ── */
+    /* ── Content sections ── */
     .sp-section {
       padding: 22px 28px 0;
     }
@@ -211,6 +209,7 @@
       border: 1px solid var(--bg3);
       border-radius: 3px;
       transition: border-color 0.15s, background 0.15s;
+      text-decoration: none;
     }
     .sp-connect-link:hover { border-color: var(--accent); background: var(--bg2); }
     .sp-connect-label {
@@ -277,17 +276,18 @@
   <!-- About bio -->
   <div class="sp-section">
     <div class="sp-section-label">About</div>
-    <p class="sp-section-body">UC Davis grad working in product and community marketing. I've always been curious about how audiences think — why some people lean in, others scroll past — and how to use that to create things that actually land. Currently at Atoms doing community and account marketing for Picnic across Northern California. Outside of work I watch too many TV shows, dabble in baking, and am always on the hunt for good matcha.</p>
+    <p class="sp-section-body">Hi again! I'm Bridget, a recent grad from UC Davis based in SF building a career in product marketing and community building. I’ve always been interested in how audiences think and how that affects perception. I like to break down why some users lean in while others scroll, and understanding the root "why?" better to create authentic stories that connects and resonates with my audience. Right now, I run community marketing for Picnic (Atoms) in Northern California, a fast-scaling B2B startup that brings lunch delivery to workplaces. My role is very people-centric, as I spend most of my time talking to our customers and building the brand as we expand and mature. This includes building relationships with all kinds of workplaces, supporting our fast-growing eater base, and ensuring every office has a successful onboarding experience from day one. My remaining time is spent creating processes and writing SOPs so the team has a foundation to move fast without starting from scratch a second time. Prior to this, I worked on operations at Amazon and led marketing for a local publication called InPrint Magazine.</p>
   </div>
 
   <!-- Currently -->
   <div class="sp-section">
     <div class="sp-section-label">Currently</div>
     <div class="sp-curr-list">
-      <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>community and account marketing at Atoms <em style="font-style:italic;color:var(--muted);font-size:11px">(Picnic)</em></span></div>
+      <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>community and product marketing at Atoms <em style="font-style:italic;color:var(--muted);font-size:11px">(Picnic)</em></span></div>
       <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>thinking a lot about how AI is changing the way marketing teams work</span></div>
       <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>open to product and community marketing roles in AI / tech</span></div>
-      <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>perfecting this website <em style="font-style:italic;color:var(--muted);font-size:11px">(it's a process)</em></span></div>
+      <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>whisking matcha at home with fun syrups <em style="font-style:italic;color:var(--muted);font-size:11px">(currently in love with the earl grey + matcha combo)</em></span></div>
+      <div class="sp-curr-item"><span class="sp-curr-dash">—</span><span>deeply engrossed in the scariest horror movie I can find <em style="font-style:italic;color:var(--muted);font-size:11px">(I need more after Backrooms and Obsession)</em></span></div>
     </div>
   </div>
 
@@ -295,16 +295,13 @@
   <div class="sp-section">
     <div class="sp-section-label">Interests</div>
     <div class="sp-interests">
-      <span class="sp-tag">matcha</span>
-      <span class="sp-tag">cats</span>
-      <span class="sp-tag">boba</span>
-      <span class="sp-tag">pokémon cards</span>
-      <span class="sp-tag">smiskis</span>
-      <span class="sp-tag">miffy</span>
-      <span class="sp-tag">travel</span>
-      <span class="sp-tag">tv shows</span>
-      <span class="sp-tag">baking</span>
       <span class="sp-tag">music</span>
+      <span class="sp-tag">kitties</span>
+      <span class="sp-tag">boba</span>
+      <span class="sp-tag">collecting smiskis</span>
+      <span class="sp-tag">traveling to new places</span>
+      <span class="sp-tag">food</span>
+      <span class="sp-tag">whisking matcha</span>
     </div>
   </div>
 
@@ -316,6 +313,7 @@
         <span class="sp-connect-label">email</span>
         <span class="sp-connect-val">Send me a message →</span>
       </a>
+      <a class="sp-connect-link" href="https://linkedin.com/in/bridget-huangg" target="_blank">
         <span class="sp-connect-label">linkedin</span>
         <span class="sp-connect-val">Connect with me →</span>
       </a>
